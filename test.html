@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>  لعبه تخمين الارقام</title>
+  <style> 
+  body{
+    background-color: black;
+    color: white;
+    width: 50%;
+    max-width: 800px;
+    min-width: 480px;
+    margin:0 auto;
+
+  }
+  .lastruslt {
+    padding: 3px;
+  }
+  
+  
+  </style>
+</head>
+<body >
+    <h1> لعبه تخمين الارقام </h1>
+
+<p>
+  لقد اخترت لك رقما عشوائي من 1-100 
+<br>
+المطلوب تخمين الرقم خلال 10 محاولات او اقل  
+<br>
+وسوف نخبرك ان كان اكبر او اصغر
+</p>
+
+
+
+<div class="form">
+  <label for="guessfaild"> ادخل التخمين :</label> <input type="text" id="guessfaild" class="guessfaild">
+  <input type="submit" value="ادخل التخمين" class="guesssubmit">
+
+</div>
+<div class="result">     
+  
+<p class="guesses"> التخمين الماضي:</p>
+<p class="lastruslt" style="background-color: red;">  خطأ</p>
+<p class="loworhi"> اخر تخمين كان اكبر من الرقم</p>
+
+
+</div>
+<script>
+var randomNumber = Math.floor (Math. random() *100) +1;
+var guesses = document.querySelector (".guesses ") ;
+var lastresult = document.queryselector (".lastresult") ;
+var loworhi = document.querySelector (".loworhi") ;
+var guesssubmit = document.queryselector (".guesssubmit") ;
+var guessField = document . queryselector (".guessField");
+var guessCount = 1;
+var resetButtons; 
+
+
+guessField.focus();
+
+function checkguess() { 
+ 
+ 
+ var userguess = Number(guessField.value) ;  
+ if (guessCount === 1)
+ {  guesses.textContent=   'التخمين الماضي :';}  
+guesses.textContent+= userguess='';
+ if(userguess === randomNumber){
+  lastresult.textContent='مبروك خمنت الرقم الصحيح';
+  lastresult.style.bachgroundcolor =-'green';
+  loworhi.textContent=' ';
+  setgameover();
+ }
+ else if( guessCount === 10){ 
+
+  lastresult.textContent=" Game Over ";
+  loworhi.textContent=" ";
+  setgameover();
+ }
+else{
+  lastresult.textContent=" خطأ";
+  lastresult.style.bachgroundcolor="red";
+if (userguess > randomNumber){loworhi.textContent=" اخر تخمين  كبير ";
+
+
+}else if(userguess<randomNumber){loworhi.textContent=" اخر تخمين صغير";}
+
+guessCount++;
+guessField.value=" ";
+guessField.focus( );
+
+}
+
+guesssubmit.addEventListener("click",checkguess);
+
+
+
+function setGameOver (){
+guessField.disabled =true;
+guesssubmit. disabled= true
+resetButton = document.createtlement ("button");
+resetButton. textContente =" ابدا لعبه جديده "
+document.body. appendchild (resetButton);
+resetButton.addEventlistener("click", resetGame);
+}
+
+
+function resetGame (){
+
+
+  guessCount =1;
+  var resetpares = document.querySelectorAll('.resultpares p');
+  for(var i = 0 ;i < resetpares.length ; i++){
+    resetpares[ i].textContent=' ';
+  }
+
+  resetButton.parentNode.removeChild (resetButton);
+
+guessField.disabled= false;
+guesssubmit.disabled= false;
+guessField. value ='';
+guessField.focus();
+
+
+lastresult.style.bachgroundcolor='white';
+
+randomNumber= Math.floor(math.random() *100) +1;
+
+
+}
+
+
+
+</script>
+
+</body>
+</html>
